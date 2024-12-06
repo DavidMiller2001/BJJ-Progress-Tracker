@@ -1,3 +1,4 @@
+import EventForm from "~/components/EventForm";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 
 export default function HomePage() {
@@ -17,6 +18,7 @@ export default function HomePage() {
             </ul>
           </CardContent>
         </Card>
+        <EventForm />
       </div>
     </main>
   );
