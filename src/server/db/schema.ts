@@ -34,7 +34,7 @@ export const posts = createTable(
 // db data for dates w notes and events
 
 export const users = createTable("users", {
-  id: int("id", { mode: "number" }).primaryKey(),
+  id: text("id", { mode: "text" }).primaryKey().notNull(),
 });
 
 export const usersRelations = relations(users, ({ many }) => ({
@@ -43,7 +43,7 @@ export const usersRelations = relations(users, ({ many }) => ({
 
 export const events = createTable("events", {
   id: int("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
-  authorId: int("author_id", { mode: "number" }).notNull(),
+  authorId: text("author_id", { mode: "text" }).notNull(),
   title: text("title", { length: 256 }),
   content: text("content", { length: 256 }),
   createdAt: int("created_at", { mode: "timestamp" })

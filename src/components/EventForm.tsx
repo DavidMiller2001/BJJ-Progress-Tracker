@@ -6,7 +6,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -15,12 +14,20 @@ import {
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { useUser } from "@clerk/nextjs";
+import { createEvent } from "~/server/actions";
+
+export const formSchema = z.object({
+  title: z.string().min(1, { message: "Event name cannot be empty!" }),
+  content: z.string().min(1, { message: "Event content cannot be empty!" }),
+});
 
 export default function EventForm() {
-  const formSchema = z.object({
-    title: z.string().min(1, { message: "Event name cannot be empty!" }),
-    content: z.string().min(1, { message: "Event content cannot be empty!" }),
-  });
+  const user = useUser();
+  let id = "-1";
+  if (user.isSignedIn) {
+    id = user.user.id;
+  }
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -31,7 +38,10 @@ export default function EventForm() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+    console.log(`ID: ${id}`);
+    console.log(`Form Data: ${values}`);
+
+    createEvent(id, values);
   }
 
   return (
@@ -50,6 +60,19 @@ export default function EventForm() {
                   <FormLabel>Event Name</FormLabel>
                   <FormControl>
                     <Input placeholder="Event Name" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="content"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Content</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Description of the event" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
