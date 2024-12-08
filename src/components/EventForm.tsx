@@ -37,11 +37,8 @@ export default function EventForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(`ID: ${id}`);
-    console.log(`Form Data: ${values}`);
-
-    createEvent(id, values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    await createEvent(id, values);
   }
 
   return (

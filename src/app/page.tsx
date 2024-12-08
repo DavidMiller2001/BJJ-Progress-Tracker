@@ -1,5 +1,6 @@
 import EventForm from "~/components/EventForm";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
+
 import { getEvents } from "~/server/actions";
 
 export default function HomePage() {
@@ -15,7 +16,6 @@ export default function HomePage() {
 
 async function EventList() {
   const events = await getEvents();
-  console.log(`events: ${events}`);
   return (
     <Card>
       <CardHeader>
