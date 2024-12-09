@@ -1,16 +1,31 @@
+import BjjCalendar from "~/components/BjjCalendar";
 import FormDialog from "~/components/FormDialog";
+import TrainingSessionForm from "~/components/TrainingSessionForm";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
+import UpcomingEvents from "~/components/UpcomingEvents";
 import { getEvents } from "~/server/actions";
 import { events } from "~/server/db/schema";
 
 export default function HomePage() {
   return (
-    <main className="flex items-center justify-center p-8">
-      <div className="w-screen max-w-lg">
-        <EventList />
-        <FormDialog />
+    // <main className="flex items-center justify-center p-8">
+    //   <div className="w-screen max-w-lg">
+    //     <EventList />
+    //     <FormDialog />
+    //   </div>
+    // </main>
+    <div className="container mx-auto p-4">
+      <h1 className="mb-6 text-3xl font-bold">BJJ Progress Tracker</h1>
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+        <div className="lg:col-span-2">
+          <BjjCalendar />
+        </div>
+        <div className="space-y-6">
+          <TrainingSessionForm />
+          <UpcomingEvents />
+        </div>
       </div>
-    </main>
+    </div>
   );
 }
 

@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" className={`${GeistSans.variable}`}>
-        <body className="bg-slate-300 p-8">
+        <body className="p-8">
           <SignedOut>
             <SignInButton />
           </SignedOut>
