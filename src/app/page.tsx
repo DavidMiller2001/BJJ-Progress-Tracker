@@ -45,6 +45,7 @@ function EventView(props: { event: EventType }) {
       </CardHeader>
       <CardContent>
         <p>{event.content}</p>
+        <p>{`${event.eventDate}`}</p>
       </CardContent>
     </Card>
   );

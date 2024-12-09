@@ -27,7 +27,6 @@ export default function FormDialog() {
           </DialogDescription>
         </DialogHeader>
         <EventForm closeDialog={setIsOpen} />
-        <DialogFooter></DialogFooter>
       </DialogContent>
     </Dialog>
   );

@@ -15,6 +15,7 @@ export async function createEvent(
     title: formData.title,
     content: formData.content,
     authorId: userId,
+    eventDate: formData.date,
   });
   revalidatePath("/");
 }

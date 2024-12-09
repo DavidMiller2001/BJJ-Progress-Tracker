@@ -44,8 +44,11 @@ export const usersRelations = relations(users, ({ many }) => ({
 export const events = createTable("events", {
   id: int("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
   authorId: text("author_id", { mode: "text" }).notNull(),
-  title: text("title", { length: 256 }),
-  content: text("content", { length: 256 }),
+  title: text("title", { length: 256 }).notNull(),
+  content: text("content", { length: 256 }).notNull(),
+  eventDate: int("event_date", { mode: "timestamp" })
+    .default(sql`(unixepoch())`)
+    .notNull(),
   createdAt: int("created_at", { mode: "timestamp" })
     .default(sql`(unixepoch())`)
     .notNull(),
