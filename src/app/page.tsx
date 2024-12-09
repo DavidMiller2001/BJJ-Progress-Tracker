@@ -38,6 +38,10 @@ type EventType = typeof events.$inferInsert;
 
 function EventView(props: { event: EventType }) {
   const { event } = props;
+  let formattedDate;
+  if (event.eventDate) {
+    formattedDate = event.eventDate.toDateString();
+  }
   return (
     <Card>
       <CardHeader>
@@ -45,7 +49,7 @@ function EventView(props: { event: EventType }) {
       </CardHeader>
       <CardContent>
         <p>{event.content}</p>
-        <p>{`${event.eventDate}`}</p>
+        <p>{`${formattedDate}`}</p>
       </CardContent>
     </Card>
   );
