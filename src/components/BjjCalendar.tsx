@@ -76,7 +76,8 @@ export default function BjjCalendar(props: { allEvents: Event[] }) {
               <p>No events scheduled for this date.</p>
             )}
           </div>
-          <FormDialog />
+
+          <FormDialog selectedDate={selectedDate ?? new Date()} />
         </div>
       </div>
     </div>

@@ -42,6 +42,7 @@ export const formSchema = z.object({
 
 export default function EventForm(props: {
   closeDialog: Dispatch<SetStateAction<boolean>>;
+  selectedDate: Date;
 }) {
   const { closeDialog } = props;
   const user = useUser();
@@ -50,14 +51,12 @@ export default function EventForm(props: {
     id = user.user.id;
   }
 
-  const eventTypeList = [];
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "Test Title",
       content: "Test Content",
-      date: new Date(),
+      date: props.selectedDate,
       type: "training",
     },
   });
