@@ -21,11 +21,23 @@ import { Calendar } from "./ui/calendar";
 import { cn } from "~/lib/utils";
 import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
+
+const eventTypes = ["training", "competition"] as const;
+type EventTypes = (typeof eventTypes)[number];
 
 export const formSchema = z.object({
   title: z.string().min(1, { message: "Event name cannot be empty!" }),
   content: z.string().min(1, { message: "Event content cannot be empty!" }),
   date: z.date({ required_error: "An event date is required!" }),
+  // type: z.union([z.literal("training"), z.literal("competition")]),
+  type: z.custom<EventTypes>(),
 });
 
 export default function EventForm(props: {
@@ -38,17 +50,21 @@ export default function EventForm(props: {
     id = user.user.id;
   }
 
+  const eventTypeList = [];
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "Test Title",
       content: "Test Content",
       date: new Date(),
+      type: "training",
     },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     closeDialog(false);
+    console.log(values);
     await createEvent(id, values);
   }
 
@@ -83,6 +99,29 @@ export default function EventForm(props: {
         />
         <FormField
           control={form.control}
+          name="type"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Event Type</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a verified email to display" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {eventTypes.map((type) => (
+                    <SelectItem key={type} value={type}>
+                      {type}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
           name="date"
           render={({ field }) => (
             <FormItem className="flex flex-col">
@@ -100,14 +139,7 @@ export default function EventForm(props: {
 }
 
 function DatePicker(props: {
-  field: ControllerRenderProps<
-    {
-      title: string;
-      content: string;
-      date: Date;
-    },
-    "date"
-  >;
+  field: ControllerRenderProps<z.infer<typeof formSchema>, "date">;
 }) {
   const { field } = props;
   return (
