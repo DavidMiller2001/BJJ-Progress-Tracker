@@ -1,49 +1,51 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card"
-import { Badge } from "~/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs"
+import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
+import { Badge } from "~/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
+import { events } from "~/server/db/schema";
 
-// This would typically come from a database or API
-const allEvents = [
-  { id: 1, type: 'training', date: '2023-06-15', notes: 'Worked on guard retention' },
-  { id: 2, type: 'competition', date: '2023-07-01', name: 'Summer BJJ Tournament' },
-  { id: 3, type: 'training', date: '2023-07-20', notes: 'Focus on takedowns' },
-  { id: 4, type: 'competition', date: '2023-08-15', name: 'Local BJJ Open' },
-  { id: 5, type: 'training', date: '2023-08-22', notes: 'Guard passing techniques' },
-  { id: 6, type: 'competition', date: '2023-09-22', name: 'State Championships' },
-  { id: 7, type: 'training', date: '2023-10-05', notes: 'Submission drills' },
-  { id: 8, type: 'competition', date: '2023-11-05', name: 'National Tournament' },
-];
+type eventType = typeof events.$inferSelect;
 
-const EventList = ({ events }: { events: typeof allEvents }) => (
+const EventList = ({ events }: { events: eventType[] }) => (
   <ul className="space-y-4">
     {events.map((event) => (
       <li key={event.id} className="flex items-center space-x-4">
-        <Badge variant={event.type === 'training' ? 'secondary' : 'destructive'}>
-          {event.type === 'training' ? 'Training' : 'Competition'}
+        <Badge
+          variant={event.type === "training" ? "secondary" : "destructive"}
+        >
+          {event.type === "training" ? "Training" : "Competition"}
         </Badge>
         <div>
-          <p className="font-semibold">{new Date(event.date).toLocaleDateString()}</p>
-          <p>{event.type === 'training' ? event.notes : event.name}</p>
+          <p className="font-semibold">
+            {new Date(event.eventDate).toLocaleDateString()}
+          </p>
+          <p>{event.type === "training" ? event.content : event.title}</p>
         </div>
       </li>
     ))}
   </ul>
-)
+);
 
-export default function UpcomingEvents() {
-  const [activeTab, setActiveTab] = useState('upcoming')
-  const currentDate = new Date()
+export default function UpcomingEvents(props: { allEvents: eventType[] }) {
+  const [activeTab, setActiveTab] = useState("upcoming");
+  const currentDate = new Date();
+  const { allEvents } = props;
 
   const pastEvents = allEvents
-    .filter(event => new Date(event.date) < currentDate)
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .filter((event) => new Date(event.eventDate) < currentDate)
+    .sort(
+      (a, b) =>
+        new Date(b.eventDate).getTime() - new Date(a.eventDate).getTime(),
+    );
 
   const upcomingEvents = allEvents
-    .filter(event => new Date(event.date) >= currentDate)
-    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+    .filter((event) => new Date(event.eventDate) >= currentDate)
+    .sort(
+      (a, b) =>
+        new Date(a.eventDate).getTime() - new Date(b.eventDate).getTime(),
+    );
 
   return (
     <Card>
@@ -73,6 +75,5 @@ export default function UpcomingEvents() {
         </Tabs>
       </CardContent>
     </Card>
-  )
+  );
 }
-

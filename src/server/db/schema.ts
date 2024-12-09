@@ -46,6 +46,7 @@ export const events = createTable("events", {
   authorId: text("author_id", { mode: "text" }).notNull(),
   title: text("title", { length: 256 }).notNull(),
   content: text("content", { length: 256 }).notNull(),
+  type: text("type", { enum: ["training", "competition"] }),
   eventDate: int("event_date", { mode: "timestamp" })
     .default(sql`(unixepoch())`)
     .notNull(),

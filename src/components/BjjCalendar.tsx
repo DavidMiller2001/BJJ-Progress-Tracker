@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Calendar as CalendarComponent } from "~/components/ui/calendar";
 import { Badge } from "~/components/ui/badge";
 import { format } from "date-fns";
+import FormDialog from "./FormDialog";
 
 // This would typically come from a database or API
 const trainingSessions = [
@@ -72,31 +73,34 @@ export default function BjjCalendar() {
             head_cell: { padding: "0.5rem 0", fontSize: "0.875rem" },
           }}
         />
-        <div>
-          <h3 className="mb-2 text-xl font-semibold">
-            {selectedDate
-              ? format(selectedDate, "MMMM d, yyyy")
-              : "Select a date"}
-          </h3>
-          {selectedTrainingSession && (
-            <div className="mb-4">
-              <Badge variant="secondary" className="mb-2">
-                Training Session
-              </Badge>
-              <p>{selectedTrainingSession.notes}</p>
-            </div>
-          )}
-          {selectedCompetition && (
-            <div>
-              <Badge variant="secondary" className="mb-2">
-                Competition
-              </Badge>
-              <p>{selectedCompetition.name}</p>
-            </div>
-          )}
-          {!selectedTrainingSession && !selectedCompetition && (
-            <p>No events scheduled for this date.</p>
-          )}
+        <div className="flex flex-col justify-between">
+          <div>
+            <h3 className="mb-2 text-xl font-semibold">
+              {selectedDate
+                ? format(selectedDate, "MMMM d, yyyy")
+                : "Select a date"}
+            </h3>
+            {selectedTrainingSession && (
+              <div className="mb-4">
+                <Badge variant="secondary" className="mb-2">
+                  Training Session
+                </Badge>
+                <p>{selectedTrainingSession.notes}</p>
+              </div>
+            )}
+            {selectedCompetition && (
+              <div>
+                <Badge variant="secondary" className="mb-2">
+                  Competition
+                </Badge>
+                <p>{selectedCompetition.name}</p>
+              </div>
+            )}
+            {!selectedTrainingSession && !selectedCompetition && (
+              <p>No events scheduled for this date.</p>
+            )}
+          </div>
+          <FormDialog />
         </div>
       </div>
     </div>
