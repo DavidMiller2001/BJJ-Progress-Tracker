@@ -2,30 +2,16 @@
 
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
-import { Badge } from "~/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import { events } from "~/server/db/schema";
+import EventView from "./EventView";
 
 type eventType = typeof events.$inferSelect;
 
 const EventList = ({ events }: { events: eventType[] }) => (
   <ul className="space-y-4">
     {events.map((event) => (
-      <li key={event.id} className="flex items-center">
-        <div className="w-28">
-          <Badge
-            variant={event.type === "training" ? "secondary" : "destructive"}
-          >
-            {event.type === "training" ? "Training" : "Competition"}
-          </Badge>
-        </div>
-        <div>
-          <p className="font-semibold">
-            {new Date(event.eventDate).toLocaleDateString()}
-          </p>
-          <p>{event.type === "training" ? event.content : event.title}</p>
-        </div>
-      </li>
+      <EventView key={event.id} event={event} />
     ))}
   </ul>
 );
@@ -52,7 +38,7 @@ export default function UpcomingEvents(props: { allEvents: eventType[] }) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>BJJ Events</CardTitle>
+        <CardTitle>BJJ Timeline</CardTitle>
       </CardHeader>
       <CardContent>
         <Tabs value={activeTab} onValueChange={setActiveTab}>
