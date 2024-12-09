@@ -6,7 +6,6 @@ import { events } from "./db/schema";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 
-// FIXME: something went wrong with inserting into the db
 export async function createEvent(
   userId: string,
   formData: z.infer<typeof formSchema>,

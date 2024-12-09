@@ -11,12 +11,14 @@ type eventType = typeof events.$inferSelect;
 const EventList = ({ events }: { events: eventType[] }) => (
   <ul className="space-y-4">
     {events.map((event) => (
-      <li key={event.id} className="flex items-center space-x-4">
-        <Badge
-          variant={event.type === "training" ? "secondary" : "destructive"}
-        >
-          {event.type === "training" ? "Training" : "Competition"}
-        </Badge>
+      <li key={event.id} className="flex items-center">
+        <div className="w-28">
+          <Badge
+            variant={event.type === "training" ? "secondary" : "destructive"}
+          >
+            {event.type === "training" ? "Training" : "Competition"}
+          </Badge>
+        </div>
         <div>
           <p className="font-semibold">
             {new Date(event.eventDate).toLocaleDateString()}
