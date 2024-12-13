@@ -6,6 +6,7 @@ import {
   ClerkProvider,
   SignedIn,
   SignedOut,
+  SignIn,
   SignInButton,
   UserButton,
 } from "@clerk/nextjs";
@@ -22,13 +23,17 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" className={`${GeistSans.variable}`}>
-        <body className="p-8">
+        <body>
           <SignedOut>
-            <SignInButton />
+            <div className="flex h-screen w-full items-center justify-center">
+              <SignIn />
+            </div>
           </SignedOut>
           <SignedIn>
-            <UserButton />
-            {children}
+            <main className="p-8">
+              <UserButton />
+              {children}
+            </main>
           </SignedIn>
         </body>
       </html>
