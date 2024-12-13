@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import { Calendar as CalendarComponent } from "~/components/ui/calendar";
-import { Badge } from "~/components/ui/badge";
 import { format } from "date-fns";
 import FormDialog from "./FormDialog";
 import { events } from "~/server/db/schema";
 import EventView from "./EventView";
+import { useUser } from "@clerk/nextjs";
 
 type Event = typeof events.$inferSelect;
 
@@ -14,14 +14,10 @@ export default function BjjCalendar(props: { allEvents: Event[] }) {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(
     new Date(),
   );
-
   const events = props.allEvents;
-
   const selectedDaysEvents = events.filter(
     (event) => event.eventDate.getTime() === selectedDate?.getTime(),
   );
-
-  console.log(`Filtered events: ${selectedDaysEvents}`);
 
   return (
     <div className="rounded-lg border p-4">
@@ -32,16 +28,11 @@ export default function BjjCalendar(props: { allEvents: Event[] }) {
           selected={selectedDate}
           onSelect={setSelectedDate}
           className="rounded-md border"
-          // modifiers={{
-          //   training: trainingDates,
-          //   competition: competitionDates,
-          // }}
           modifiersStyles={{
             training: { backgroundColor: "rgba(34, 197, 94, 0.1)" },
             competition: { backgroundColor: "rgba(249, 115, 22, 0.1)" },
           }}
           styles={{
-            // day_today: { fontWeight: 'bold' },
             day: {
               width: "100%",
               height: "100%",

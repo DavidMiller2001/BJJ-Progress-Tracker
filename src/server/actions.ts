@@ -24,3 +24,10 @@ export async function getEvents() {
   const events = await db.query.events.findMany();
   return events;
 }
+
+// export async function getEventsForUser(userId: string) {
+//   const events = await db.query.events.findMany({
+//     where: (model, { eq }) => eq(model.authorId, userId),
+//   });
+//   return events;
+// }
