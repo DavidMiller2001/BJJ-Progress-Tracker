@@ -10,6 +10,7 @@ import {
   SignInButton,
   UserButton,
 } from "@clerk/nextjs";
+import { Button } from "~/components/ui/button";
 
 export const metadata: Metadata = {
   title: "Bjj Calendar v1",
@@ -25,7 +26,7 @@ export default function RootLayout({
       <html lang="en" className={`${GeistSans.variable}`}>
         <body>
           <Nav />
-          {children}
+          <main>{children}</main>
         </body>
       </html>
     </ClerkProvider>
@@ -39,7 +40,13 @@ function Nav() {
         <h2 className="text-lg font-semibold">Bjj Calendar</h2>
         <div>
           <SignedOut>
-            <SignInButton />
+            <Button
+              asChild
+              variant={"ghost"}
+              className="text-md outline outline-2 outline-white"
+            >
+              <SignInButton />
+            </Button>
           </SignedOut>
           <SignedIn>
             <UserButton />
