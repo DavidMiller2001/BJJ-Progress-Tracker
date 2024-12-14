@@ -3,12 +3,10 @@
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
-import { events } from "~/server/db/schema";
+import type { Event } from "~/server/db/schema";
 import EventView from "./EventView";
 
-type eventType = typeof events.$inferSelect;
-
-const EventList = ({ events }: { events: eventType[] }) => (
+const EventList = ({ events }: { events: Event[] }) => (
   <ul className="space-y-4">
     {events.map((event) => (
       <EventView key={event.id} event={event} />
@@ -16,7 +14,7 @@ const EventList = ({ events }: { events: eventType[] }) => (
   </ul>
 );
 
-export default function UpcomingEvents(props: { allEvents: eventType[] }) {
+export default function UpcomingEvents(props: { allEvents: Event[] }) {
   const [activeTab, setActiveTab] = useState("upcoming");
   const currentDate = new Date();
   const { allEvents } = props;

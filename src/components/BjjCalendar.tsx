@@ -4,11 +4,8 @@ import { useState } from "react";
 import { Calendar as CalendarComponent } from "~/components/ui/calendar";
 import { format } from "date-fns";
 import FormDialog from "./FormDialog";
-import { events } from "~/server/db/schema";
+import type { Event } from "~/server/db/schema";
 import EventView from "./EventView";
-import { useUser } from "@clerk/nextjs";
-
-type Event = typeof events.$inferSelect;
 
 export default function BjjCalendar(props: { allEvents: Event[] }) {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(
