@@ -1,11 +1,15 @@
 import { SignedIn, SignedOut } from "@clerk/nextjs";
-import Container from "~/components/ContainerWithUserData";
-import { getEvents } from "~/server/actions";
+import { auth } from "@clerk/nextjs/server";
+import BjjCalendar from "~/components/BjjCalendar";
+import UpcomingEvents from "~/components/UpcomingEvents";
+import { getEventsForUser } from "~/server/actions";
 
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  const events = await getEvents();
+  const user = await auth();
+
+  const events = await getEventsForUser(user.userId ?? "");
   return (
     <>
       <SignedOut>
@@ -15,7 +19,14 @@ export default async function HomePage() {
       </SignedOut>
       <SignedIn>
         <div className="container mx-auto p-4">
-          <Container events={events} />
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+            <div className="lg:col-span-2">
+              <BjjCalendar allEvents={events} />
+            </div>
+            <div className="space-y-6">
+              <UpcomingEvents allEvents={events} />
+            </div>
+          </div>
         </div>
       </SignedIn>
     </>
