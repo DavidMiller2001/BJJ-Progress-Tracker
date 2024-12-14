@@ -24,7 +24,7 @@ export default function BjjCalendar(props: { allEvents: Event[] }) {
           mode="single"
           selected={selectedDate}
           onSelect={setSelectedDate}
-          className="rounded-md border"
+          className="flex py-0 [&>*]:rounded-md [&>*]:border [&>*]:p-3"
           modifiersStyles={{
             training: { backgroundColor: "rgba(34, 197, 94, 0.1)" },
             competition: { backgroundColor: "rgba(249, 115, 22, 0.1)" },
@@ -38,7 +38,9 @@ export default function BjjCalendar(props: { allEvents: Event[] }) {
               alignItems: "center",
               justifyContent: "center",
             },
-            month: { height: "100%" },
+            month: {
+              height: "100%",
+            },
             caption: { fontSize: "1.2rem", marginBottom: "0.5rem" },
             nav_button_previous: { width: "2rem", height: "2rem" },
             nav_button_next: { width: "2rem", height: "2rem" },

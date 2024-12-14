@@ -18,14 +18,10 @@ export default async function HomePage() {
         </div>
       </SignedOut>
       <SignedIn>
-        <div className="container mx-auto p-4">
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-            <div className="lg:col-span-2">
-              <BjjCalendar allEvents={events} />
-            </div>
-            <div className="space-y-6">
-              <UpcomingEvents allEvents={events} />
-            </div>
+        <div className="container mx-auto w-full max-w-3xl p-4">
+          <div className="grid grid-cols-1 gap-6">
+            <BjjCalendar allEvents={events} />
+            <UpcomingEvents allEvents={events} />
           </div>
         </div>
       </SignedIn>
