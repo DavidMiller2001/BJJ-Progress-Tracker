@@ -1,7 +1,7 @@
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import BjjCalendar from "~/components/BjjCalendar";
 import UpcomingEvents from "~/components/UpcomingEvents";
-import { getEventsForUser } from "~/server/actions";
+import { getEventsForUser } from "~/server/queries";
 
 export const dynamic = "force-dynamic";
 

@@ -1,11 +1,12 @@
+"use server";
+
 import { formSchema } from "~/components/EventForm";
-import { db } from "./db";
 import { events } from "./db/schema";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
-import "server-only";
-import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+import { auth } from "@clerk/nextjs/server";
+import { db } from "./db";
 
 export async function createEvent(formData: z.infer<typeof formSchema>) {
   const user = await auth();
@@ -23,15 +24,4 @@ export async function createEvent(formData: z.infer<typeof formSchema>) {
   });
   revalidatePath("/");
   redirect("/");
-}
-
-export async function getEventsForUser() {
-  const user = await auth();
-  if (!user || !user.userId) {
-    throw new Error("Unauthorized!");
-  }
-  const events = await db.query.events.findMany({
-    where: (model, { eq }) => eq(model.authorId, user.userId),
-  });
-  return events;
 }

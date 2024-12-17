@@ -8,9 +8,7 @@ export default function EventView(props: { event: eventType }) {
   return (
     <li key={event.id} className="flex items-center">
       <div className="w-28">
-        <Badge
-          variant={event.type === "training" ? "secondary" : "destructive"}
-        >
+        <Badge variant={event.type === "training" ? "secondary" : "default"}>
           {event.type === "training" ? "Training" : "Competition"}
         </Badge>
       </div>
