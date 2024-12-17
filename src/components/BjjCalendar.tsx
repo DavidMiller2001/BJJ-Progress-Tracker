@@ -19,12 +19,13 @@ export default function BjjCalendar(props: { allEvents: Event[] }) {
   return (
     <div className="rounded-lg border p-4">
       <h2 className="mb-4 text-2xl font-semibold">BJJ Calendar</h2>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <CalendarComponent
           mode="single"
           selected={selectedDate}
           onSelect={setSelectedDate}
-          className="flex py-0 [&>*]:rounded-md [&>*]:border [&>*]:p-3"
+          // className="flex rounded-md border"
+          className="hidden p-0 sm:block [&>*]:[&>*]:m-auto [&>*]:[&>*]:w-full [&>*]:rounded-md [&>*]:border [&>*]:p-4 [&_tr]:mx-[10%] [&_tr]:w-[80%]"
           modifiersStyles={{
             training: { backgroundColor: "rgba(34, 197, 94, 0.1)" },
             competition: { backgroundColor: "rgba(249, 115, 22, 0.1)" },
