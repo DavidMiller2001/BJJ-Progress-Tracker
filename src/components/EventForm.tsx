@@ -28,15 +28,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
+import { events } from "~/server/db/schema";
 
-const eventTypes = ["training", "competition"] as const;
-type EventTypes = (typeof eventTypes)[number];
+type EventTypes = (typeof events.type.enumValues)[number];
+const eventTypes = events.type.enumValues;
 
 export const formSchema = z.object({
   title: z.string().min(1, { message: "Event name cannot be empty!" }),
   content: z.string().min(1, { message: "Event content cannot be empty!" }),
   date: z.date({ required_error: "An event date is required!" }),
-  // type: z.union([z.literal("training"), z.literal("competition")]),
   type: z.custom<EventTypes>(),
 });
 
