@@ -14,23 +14,6 @@ export const createTable = sqliteTableCreator(
   (name) => `bjj-progress-tracker_${name}`,
 );
 
-export const posts = createTable(
-  "post",
-  {
-    id: int("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
-    name: text("name", { length: 256 }),
-    createdAt: int("created_at", { mode: "timestamp" })
-      .default(sql`(unixepoch())`)
-      .notNull(),
-    updatedAt: int("updated_at", { mode: "timestamp" }).$onUpdate(
-      () => new Date(),
-    ),
-  },
-  (example) => ({
-    nameIndex: index("name_idx").on(example.name),
-  }),
-);
-
 // db data for dates w notes and events
 
 export const users = createTable("users", {
@@ -46,7 +29,9 @@ export const events = createTable("events", {
   authorId: text("author_id", { mode: "text" }).notNull(),
   title: text("title", { length: 256 }).notNull(),
   content: text("content", { length: 256 }).notNull(),
-  type: text("type", { enum: ["training", "competition"] }),
+  type: text("type", {
+    enum: ["training", "competition", "promotion"],
+  }).notNull(),
   eventDate: int("event_date", { mode: "timestamp" })
     .default(sql`(unixepoch())`)
     .notNull(),
