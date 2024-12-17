@@ -1,5 +1,4 @@
 import { SignedIn, SignedOut } from "@clerk/nextjs";
-import { auth } from "@clerk/nextjs/server";
 import BjjCalendar from "~/components/BjjCalendar";
 import UpcomingEvents from "~/components/UpcomingEvents";
 import { getEventsForUser } from "~/server/actions";
@@ -7,9 +6,7 @@ import { getEventsForUser } from "~/server/actions";
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  const user = await auth();
-
-  const events = await getEventsForUser(user.userId ?? "");
+  const events = await getEventsForUser();
   return (
     <>
       <SignedOut>

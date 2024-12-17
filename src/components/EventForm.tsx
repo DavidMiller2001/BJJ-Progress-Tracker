@@ -13,7 +13,6 @@ import {
 } from "./ui/form";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import { useUser } from "@clerk/nextjs";
 import { createEvent } from "~/server/actions";
 import { Dispatch, SetStateAction } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
@@ -45,11 +44,6 @@ export default function EventForm(props: {
   selectedDate: Date;
 }) {
   const { closeDialog } = props;
-  const user = useUser();
-  let id = "-1";
-  if (user.isSignedIn) {
-    id = user.user.id;
-  }
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -64,7 +58,7 @@ export default function EventForm(props: {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     closeDialog(false);
     console.log(values);
-    await createEvent(id, values);
+    await createEvent(values);
   }
 
   return (
