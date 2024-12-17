@@ -1,18 +1,9 @@
 import { events } from "~/server/db/schema";
 import { Badge } from "./ui/badge";
-import { Button } from "./ui/button";
 import { deleteEvent } from "~/server/actions";
 import { CircleX } from "lucide-react";
 
 type eventType = typeof events.$inferSelect;
-
-function capitalize(str: string) {
-  const charArr = str.split("");
-  charArr[0] = (charArr[0] ?? "").toUpperCase();
-  let formattedStr = "";
-  formattedStr = charArr.join("");
-  return formattedStr;
-}
 
 export default function EventView(props: { event: eventType }) {
   const { event } = props;
@@ -20,8 +11,8 @@ export default function EventView(props: { event: eventType }) {
   const badgeText = capitalize(event.type);
 
   return (
-    <li key={event.id} className="flex items-center">
-      <div className="flex w-full items-center justify-between">
+    <li key={event.id}>
+      <div className="flex w-full items-center justify-between rounded-md border p-4">
         <div className="flex items-center">
           <div className="w-28">
             <Badge
@@ -53,11 +44,19 @@ export default function EventView(props: { event: eventType }) {
             }}
           >
             <button type="submit">
-              <CircleX size={30} />
+              <CircleX />
             </button>
           </form>
         </div>
       </div>
     </li>
   );
+}
+
+function capitalize(str: string) {
+  const charArr = str.split("");
+  charArr[0] = (charArr[0] ?? "").toUpperCase();
+  let formattedStr = "";
+  formattedStr = charArr.join("");
+  return formattedStr;
 }
