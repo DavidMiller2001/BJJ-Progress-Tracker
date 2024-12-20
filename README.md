@@ -2,7 +2,12 @@
 
 ## TODO
 
-- [ ] Fix db call to only fetch data for signed in user.
+- [ ] Make update form (refactor to a single form component that takes in props to determine what kind of form it is?)
+- [ ] Make form dialog reusable for both the create and update forms
+- [ ] State management solution to avoid a bunch of prop drilling (zustand or jotai are ones I've heard of but need more research)
+- [ ] Dynamic routes for individual events
+- [ ] Some sort of list view to easier see all events by a given date or event
+- [ ] Hosting (probably just vercel)
 
 ## Learn More
 
