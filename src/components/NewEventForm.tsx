@@ -13,7 +13,7 @@ import {
 } from "./ui/form";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import { createEvent } from "~/server/actions";
+import { createEvent, updateEvent } from "~/server/actions";
 import { Dispatch, SetStateAction } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Calendar } from "./ui/calendar";
@@ -41,7 +41,7 @@ export const formSchema = z.object({
   type: z.custom<EventTypes>(),
 });
 
-export default function EventForm(props: {
+export default function NewEventForm(props: {
   closeDialog: Dispatch<SetStateAction<boolean>>;
 }) {
   const { closeDialog } = props;
@@ -60,10 +60,8 @@ export default function EventForm(props: {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     closeDialog(false);
-    console.log(values);
     await createEvent(values);
   }
-
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">

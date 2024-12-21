@@ -2,6 +2,7 @@ import { events } from "~/server/db/schema";
 import { Badge } from "./ui/badge";
 import { deleteEvent } from "~/server/actions";
 import { CircleX } from "lucide-react";
+import { DialogForUpdateForm } from "./FormDialog";
 
 type eventType = typeof events.$inferSelect;
 
@@ -36,7 +37,8 @@ export default function EventView(props: { event: eventType }) {
             <p>{event.title}</p>
           </div>
         </div>
-        <div>
+        <div className="flex gap-2">
+          <DialogForUpdateForm id={event.id} />
           <form
             className="flex items-center"
             action={async () => {

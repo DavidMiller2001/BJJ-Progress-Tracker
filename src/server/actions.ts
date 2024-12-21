@@ -1,6 +1,6 @@
 "use server";
 
-import { formSchema } from "~/components/EventForm";
+import { formSchema } from "~/components/NewEventForm";
 import { events } from "./db/schema";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";

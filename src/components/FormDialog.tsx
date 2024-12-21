@@ -7,26 +7,47 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "~/components/ui/dialog";
-import EventForm from "~/components/EventForm";
 import { Button } from "~/components/ui/button";
 import { useState } from "react";
+import NewEventForm from "~/components/NewEventForm";
+import UpdateEventForm from "./UpdateEventForm";
 
-export default function FormDialog() {
+function FormDialog(props: { formType: "create" | "update"; id: number }) {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button>New Event</Button>
+        <Button>
+          {props.formType === "create" && "New Event"}
+          {props.formType === "update" && "Update Event"}
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Create New Event</DialogTitle>
+          <DialogTitle>
+            {props.formType === "create" && "Create New Event"}
+            {props.formType === "update" && "Update Existing Event"}
+          </DialogTitle>
           <DialogDescription>
-            Add a new entry to the list of upcoming events.
+            {props.formType === "create" &&
+              "Add a new entry to the list of upcoming events."}
           </DialogDescription>
         </DialogHeader>
-        <EventForm closeDialog={setIsOpen} />
+        {props.formType === "create" && (
+          <NewEventForm closeDialog={setIsOpen} />
+        )}
+        {props.formType === "update" && (
+          <UpdateEventForm closeDialog={setIsOpen} eventId={props.id} />
+        )}
       </DialogContent>
     </Dialog>
   );
+}
+
+export function DialogForCreateForm() {
+  return <FormDialog formType="create" id={-1} />;
+}
+
+export function DialogForUpdateForm(props: { id: number }) {
+  return <FormDialog formType="update" id={props.id} />;
 }

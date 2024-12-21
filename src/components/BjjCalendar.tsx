@@ -2,7 +2,7 @@
 
 import { Calendar as CalendarComponent } from "~/components/ui/calendar";
 import { format } from "date-fns";
-import FormDialog from "./FormDialog";
+import { DialogForCreateForm } from "./FormDialog";
 import type { Event } from "~/server/db/schema";
 import EventView from "./EventView";
 import { selectedDateAtom } from "~/app/atoms";
@@ -67,7 +67,7 @@ export default function BjjCalendar(props: { allEvents: Event[] }) {
             )}
           </div>
 
-          <FormDialog />
+          <DialogForCreateForm />
         </div>
       </div>
     </div>

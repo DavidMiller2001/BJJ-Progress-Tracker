@@ -12,3 +12,14 @@ export async function getEventsForUser() {
   });
   return events;
 }
+
+export async function getEventById(id: number) {
+  const user = await auth();
+  if (!user || !user.userId) {
+    throw new Error("Unauthorized!");
+  }
+  const event = await db.query.events.findFirst({
+    where: (model, { eq }) => eq(model.id, id),
+  });
+  return event;
+}
