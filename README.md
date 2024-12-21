@@ -2,11 +2,12 @@
 
 ## TODO
 
-- [ ] Make update form (refactor to a single form component that takes in props to determine what kind of form it is?)
-- [ ] Make form dialog reusable for both the create and update forms
-- [ ] State management solution to avoid a bunch of prop drilling (zustand or jotai are ones I've heard of but need more research)
+- [x] Make update form (refactor to a single form component that takes in props to determine what kind of form it is?)
+- [x] Make form dialog reusable for both the create and update forms
+- [x] State management solution to avoid a bunch of prop drilling (zustand or jotai are ones I've heard of but need more research)
 - [ ] Dynamic routes for individual events
 - [ ] Some sort of list view to easier see all events by a given date or event
+- [ ] Color code dates in the calendar with any associated events
 - [ ] Hosting (probably just vercel)
 
 ## Learn More
