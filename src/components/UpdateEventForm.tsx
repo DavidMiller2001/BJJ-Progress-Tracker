@@ -43,25 +43,23 @@ export const formSchema = z.object({
 
 export default function UpdateEventForm(props: {
   closeDialog: Dispatch<SetStateAction<boolean>>;
-  eventId: number;
+  event: Event;
 }) {
-  const { closeDialog } = props;
+  const { closeDialog, event } = props;
 
   const selectedDate = useAtomValue(selectedDateAtom);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: "Event Title",
-      content: "Event Description",
-      date: selectedDate,
-      type: "training",
+      ...event,
+      date: event.eventDate,
     },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     closeDialog(false);
-    await updateEvent(1, values);
+    await updateEvent(props.event.id, values);
   }
   return (
     <Form {...form}>

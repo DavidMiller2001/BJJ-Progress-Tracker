@@ -36,7 +36,7 @@ export default function EventView(props: { event: Event }) {
           </div>
         </div>
         <div className="flex gap-2">
-          <DialogForUpdateForm id={event.id} />
+          <DialogForUpdateForm event={event} />
           <form
             className="flex items-center"
             action={async () => {

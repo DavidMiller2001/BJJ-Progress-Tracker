@@ -75,4 +75,6 @@ export async function updateEvent(
       type: formData.type,
     })
     .where(and(eq(events.id, id), eq(events.authorId, user.userId)));
+
+  revalidatePath("/");
 }
