@@ -1,16 +1,15 @@
 "use client";
 
-import { useState } from "react";
 import { Calendar as CalendarComponent } from "~/components/ui/calendar";
 import { format } from "date-fns";
 import FormDialog from "./FormDialog";
 import type { Event } from "~/server/db/schema";
 import EventView from "./EventView";
+import { selectedDateAtom } from "~/app/atoms";
+import { useAtom } from "jotai";
 
 export default function BjjCalendar(props: { allEvents: Event[] }) {
-  const [selectedDate, setSelectedDate] = useState<Date | undefined>(
-    new Date(),
-  );
+  const [selectedDate, setSelectedDate] = useAtom(selectedDateAtom);
   const events = props.allEvents;
   const selectedDaysEvents = events.filter(
     (event) => event.eventDate.getTime() === selectedDate?.getTime(),
@@ -68,7 +67,7 @@ export default function BjjCalendar(props: { allEvents: Event[] }) {
             )}
           </div>
 
-          <FormDialog selectedDate={selectedDate ?? new Date()} />
+          <FormDialog />
         </div>
       </div>
     </div>

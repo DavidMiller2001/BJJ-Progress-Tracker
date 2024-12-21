@@ -3,7 +3,6 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -12,7 +11,7 @@ import EventForm from "~/components/EventForm";
 import { Button } from "~/components/ui/button";
 import { useState } from "react";
 
-export default function FormDialog(props: { selectedDate: Date }) {
+export default function FormDialog() {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -26,7 +25,7 @@ export default function FormDialog(props: { selectedDate: Date }) {
             Add a new entry to the list of upcoming events.
           </DialogDescription>
         </DialogHeader>
-        <EventForm closeDialog={setIsOpen} selectedDate={props.selectedDate} />
+        <EventForm closeDialog={setIsOpen} />
       </DialogContent>
     </Dialog>
   );

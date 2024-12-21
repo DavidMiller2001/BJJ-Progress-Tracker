@@ -28,6 +28,8 @@ import {
   SelectValue,
 } from "./ui/select";
 import { events } from "~/server/db/schema";
+import { selectedDateAtom } from "~/app/atoms";
+import { useAtomValue } from "jotai";
 
 type EventTypes = (typeof events.type.enumValues)[number];
 const eventTypes = events.type.enumValues;
@@ -41,16 +43,17 @@ export const formSchema = z.object({
 
 export default function EventForm(props: {
   closeDialog: Dispatch<SetStateAction<boolean>>;
-  selectedDate: Date;
 }) {
   const { closeDialog } = props;
+
+  const selectedDate = useAtomValue(selectedDateAtom);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: "Test Title",
-      content: "Test Content",
-      date: props.selectedDate,
+      title: "Event Title",
+      content: "Event Description",
+      date: selectedDate,
       type: "training",
     },
   });
