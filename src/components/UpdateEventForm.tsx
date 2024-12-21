@@ -27,7 +27,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
-import { events } from "~/server/db/schema";
+import { Event, events } from "~/server/db/schema";
 import { selectedDateAtom } from "~/app/atoms";
 import { useAtomValue } from "jotai";
 

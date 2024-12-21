@@ -1,12 +1,10 @@
-import { events } from "~/server/db/schema";
+import { Event, events } from "~/server/db/schema";
 import { Badge } from "./ui/badge";
 import { deleteEvent } from "~/server/actions";
 import { CircleX } from "lucide-react";
 import { DialogForUpdateForm } from "./FormDialog";
 
-type eventType = typeof events.$inferSelect;
-
-export default function EventView(props: { event: eventType }) {
+export default function EventView(props: { event: Event }) {
   const { event } = props;
 
   const badgeText = capitalize(event.type);
