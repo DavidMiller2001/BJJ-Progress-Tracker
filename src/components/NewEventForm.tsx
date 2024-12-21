@@ -30,6 +30,7 @@ import {
 import { events } from "~/server/db/schema";
 import { selectedDateAtom } from "~/app/atoms";
 import { useAtomValue } from "jotai";
+import { Textarea } from "./ui/textarea";
 
 type EventTypes = (typeof events.type.enumValues)[number];
 const eventTypes = events.type.enumValues;
@@ -85,7 +86,7 @@ export default function NewEventForm(props: {
             <FormItem>
               <FormLabel>Content</FormLabel>
               <FormControl>
-                <Input placeholder="Description of the event" {...field} />
+                <Textarea placeholder="Description of the event" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -126,7 +127,9 @@ export default function NewEventForm(props: {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit" className="w-full">
+          Submit
+        </Button>
       </form>
     </Form>
   );

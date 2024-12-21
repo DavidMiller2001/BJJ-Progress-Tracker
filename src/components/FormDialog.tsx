@@ -12,6 +12,7 @@ import { useState } from "react";
 import NewEventForm from "~/components/NewEventForm";
 import UpdateEventForm from "./UpdateEventForm";
 import { Event } from "~/server/db/schema";
+import { PencilRuler } from "lucide-react";
 
 function FormDialog(props: {
   formType: "create" | "update";
@@ -21,10 +22,15 @@ function FormDialog(props: {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button>
-          {props.formType === "create" && "New Event"}
-          {props.formType === "update" && "Update Event"}
-        </Button>
+        {props.formType === "create" ? (
+          <Button>New Event</Button>
+        ) : props.formType === "update" ? (
+          <button>
+            <PencilRuler />
+          </button>
+        ) : (
+          <div />
+        )}
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
