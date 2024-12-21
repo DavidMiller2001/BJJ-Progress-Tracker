@@ -7,6 +7,7 @@ export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
   const events = await getEventsForUser();
+
   return (
     <>
       <SignedOut>
@@ -16,10 +17,12 @@ export default async function HomePage() {
       </SignedOut>
       <SignedIn>
         <div className="container mx-auto w-full max-w-3xl p-4">
-          <div className="grid grid-cols-1 gap-6">
-            <BjjCalendar allEvents={events} />
-            <UpcomingEvents allEvents={events} />
-          </div>
+          {events && (
+            <div className="grid grid-cols-1 gap-6">
+              <BjjCalendar allEvents={events} />
+              <UpcomingEvents allEvents={events} />
+            </div>
+          )}
         </div>
       </SignedIn>
     </>
