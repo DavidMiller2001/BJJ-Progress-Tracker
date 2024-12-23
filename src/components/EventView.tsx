@@ -1,9 +1,10 @@
-import { Event, events } from "~/server/db/schema";
+import { Event } from "~/server/db/schema";
 import { Badge } from "./ui/badge";
 import { deleteEvent } from "~/server/actions";
 import { CircleX } from "lucide-react";
 import { DialogForUpdateForm } from "./FormDialog";
 import Link from "next/link";
+import { capitalize } from "~/lib/utils";
 
 export default function EventView(props: { event: Event }) {
   const { event } = props;
@@ -54,12 +55,4 @@ export default function EventView(props: { event: Event }) {
       </div>
     </li>
   );
-}
-
-function capitalize(str: string) {
-  const charArr = str.split("");
-  charArr[0] = (charArr[0] ?? "").toUpperCase();
-  let formattedStr = "";
-  formattedStr = charArr.join("");
-  return formattedStr;
 }

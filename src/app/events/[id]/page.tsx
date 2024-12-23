@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
-import { cn } from "~/lib/utils";
+import { capitalize, cn } from "~/lib/utils";
 import { Event } from "~/server/db/schema";
 import { getEventById } from "~/server/queries";
 
@@ -27,6 +27,7 @@ export default async function EventPage({
 
 function ExpandedEventView(props: { event: Event }) {
   const { event } = props;
+  const badgeText = capitalize(event.type);
   return (
     <Card className="shrink-0 basis-[500px]">
       <CardHeader className="flex flex-row items-center justify-between">
