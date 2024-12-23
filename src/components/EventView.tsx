@@ -3,6 +3,7 @@ import { Badge } from "./ui/badge";
 import { deleteEvent } from "~/server/actions";
 import { CircleX } from "lucide-react";
 import { DialogForUpdateForm } from "./FormDialog";
+import Link from "next/link";
 
 export default function EventView(props: { event: Event }) {
   const { event } = props;
@@ -30,9 +31,11 @@ export default function EventView(props: { event: Event }) {
           </div>
           <div>
             <p className="font-semibold">
-              {new Date(event.eventDate).toLocaleDateString()}
+              {event.eventDate.toLocaleDateString()}
             </p>
-            <p>{event.title}</p>
+            <Link href={`/events/${event.id}`}>
+              <p>{event.title}</p>
+            </Link>
           </div>
         </div>
         <div className="flex gap-2">

@@ -27,7 +27,9 @@ export default function RootLayout({
       <html lang="en" className={`${GeistSans.variable}`}>
         <body className="">
           <Nav />
-          <main>{children}</main>
+          <main className="flex h-screen items-center justify-center">
+            {children}
+          </main>
         </body>
       </html>
     </ClerkProvider>
@@ -37,7 +39,7 @@ export default function RootLayout({
 function Nav() {
   return (
     <header>
-      <nav className="flex w-full items-center justify-between bg-black p-4 text-white">
+      <nav className="fixed top-0 flex w-full items-center justify-between bg-black p-4 text-white">
         <Link href="/">
           <h2 className="text-lg font-semibold">Bjj Calendar</h2>
         </Link>
