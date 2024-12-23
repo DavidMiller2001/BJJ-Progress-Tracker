@@ -11,6 +11,7 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 import { Button } from "~/components/ui/button";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Bjj Calendar v1",
@@ -37,7 +38,9 @@ function Nav() {
   return (
     <header>
       <nav className="flex w-full items-center justify-between bg-black p-4 text-white">
-        <h2 className="text-lg font-semibold">Bjj Calendar</h2>
+        <Link href="/">
+          <h2 className="text-lg font-semibold">Bjj Calendar</h2>
+        </Link>
         <div>
           <SignedOut>
             <Button
