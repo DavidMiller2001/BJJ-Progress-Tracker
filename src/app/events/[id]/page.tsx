@@ -39,10 +39,18 @@ function ExpandedEventView(props: { event: Event }) {
         </div>
         <div className="margin-0 flex items-center justify-center">
           <Badge
-            variant={"destructive"}
-            className={cn("m-0 text-lg font-semibold")}
+            className="text-lg font-semibold"
+            variant={
+              event.type === "training"
+                ? "default"
+                : event.type === "competition"
+                  ? "destructive"
+                  : event.type === "promotion"
+                    ? "secondary"
+                    : undefined
+            }
           >
-            Competition
+            {`${badgeText}`}
           </Badge>
         </div>
       </CardHeader>
