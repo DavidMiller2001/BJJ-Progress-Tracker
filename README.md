@@ -2,6 +2,8 @@
 
 ## TODO
 
+## This is from my pc after refresh! I hope this still goes to the same repo
+
 - [x] Make update form (refactor to a single form component that takes in props to determine what kind of form it is?)
 - [x] Make form dialog reusable for both the create and update forms
 - [x] State management solution to avoid a bunch of prop drilling (zustand or jotai are ones I've heard of but need more research)
