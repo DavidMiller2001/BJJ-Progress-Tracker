@@ -20,7 +20,7 @@ export async function getEventById(id: number) {
     throw new Error("Unauthorized!");
   }
   const event = await db.query.events.findFirst({
-    where: (model, { eq }) => eq(model.id, id),
+    where: (model, { eq, and }) => and(eq(model.id, id), eq(model.authorId, user.userId)),
   });
   return event;
 }
