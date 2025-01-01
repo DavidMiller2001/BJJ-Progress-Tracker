@@ -11,6 +11,8 @@ import { useAtom } from "jotai";
 export default function BjjCalendar(props: { allEvents: Event[] }) {
   const [selectedDate, setSelectedDate] = useAtom(selectedDateAtom);
   const events = props.allEvents;
+  const competitions = events.filter((event) => event.type === 'competition').map((event) => new Date(event.eventDate))
+  const trainingSessions = events.filter((event) => event.type === 'training').map((event) => new Date(event.eventDate))
   const selectedDaysEvents = events.filter(
     (event) => event.eventDate.getTime() === selectedDate?.getTime(),
   );
@@ -25,9 +27,13 @@ export default function BjjCalendar(props: { allEvents: Event[] }) {
           onSelect={setSelectedDate}
           // className="flex rounded-md border"
           className="hidden p-0 sm:block [&>*]:[&>*]:m-auto [&>*]:[&>*]:w-full [&>*]:rounded-md [&>*]:border [&>*]:p-4 [&_tr]:mx-[10%] [&_tr]:w-[80%]"
+          modifiers={{
+            competition: competitions,
+            training: trainingSessions,
+          }}
           modifiersStyles={{
-            training: { backgroundColor: "rgba(34, 197, 94, 0.1)" },
-            competition: { backgroundColor: "rgba(249, 115, 22, 0.1)" },
+            training: { backgroundColor: "#4f46e5" },
+            competition: { backgroundColor: "hsl(0 84.2% 60.2%)", color: "white" },
           }}
           styles={{
             day: {
