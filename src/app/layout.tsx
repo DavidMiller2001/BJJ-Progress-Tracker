@@ -39,7 +39,7 @@ export default function RootLayout({
 function Nav() {
   return (
     <header>
-      <nav className="fixed top-0 flex w-full items-center justify-between bg-black p-4 text-white">
+      <nav className="fixed z-10 top-0 flex w-full items-center justify-between bg-black p-4 text-white">
         <Link href="/">
           <h2 className="text-lg font-semibold">Calendar</h2>
         </Link>
