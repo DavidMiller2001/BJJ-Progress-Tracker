@@ -25,14 +25,13 @@ export default function BjjCalendar(props: { allEvents: Event[] }) {
           mode="single"
           selected={selectedDate}
           onSelect={setSelectedDate}
-          // className="flex rounded-md border"
           className="hidden p-0 sm:block [&>*]:[&>*]:m-auto [&>*]:[&>*]:w-full [&>*]:rounded-md [&>*]:border [&>*]:p-4 [&_tr]:mx-[10%] [&_tr]:w-[80%]"
           modifiers={{
             competition: competitions,
             training: trainingSessions,
           }}
           modifiersStyles={{
-            training: { backgroundColor: "#4f46e5" },
+            training: { backgroundColor: "#4f46e5", color: "white"},
             competition: { backgroundColor: "hsl(0 84.2% 60.2%)", color: "white" },
           }}
           styles={{

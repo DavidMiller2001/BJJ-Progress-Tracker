@@ -36,7 +36,7 @@ export default function UpcomingEvents(props: { allEvents: Event[] }) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>BJJ Timeline</CardTitle>
+        <CardTitle>Events</CardTitle>
       </CardHeader>
       <CardContent>
         <Tabs value={activeTab} onValueChange={setActiveTab}>
