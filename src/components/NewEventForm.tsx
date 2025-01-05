@@ -16,7 +16,7 @@ import { Button } from "./ui/button";
 import { createEvent, updateEvent } from "~/server/actions";
 import { Dispatch, SetStateAction } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
-import { Calendar } from "./ui/calendar";
+import { Calendar as CalendarComponent } from "./ui/calendar";
 import { cn } from "~/lib/utils";
 import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
@@ -154,7 +154,7 @@ function DatePicker(props: {
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0" align="start">
-        <Calendar
+        <CalendarComponent
           mode="single"
           selected={field.value}
           onSelect={field.onChange}

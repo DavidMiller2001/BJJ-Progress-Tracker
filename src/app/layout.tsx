@@ -41,7 +41,7 @@ function Nav() {
     <header>
       <nav className="fixed z-10 top-0 flex w-full items-center justify-between bg-black p-4 text-white">
         <Link href="/">
-          <h2 className="text-lg font-semibold">Calendar</h2>
+          <h2 className="text-lg font-semibold">Progress Tracker</h2>
         </Link>
         <div>
           <SignedOut>

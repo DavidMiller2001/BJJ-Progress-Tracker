@@ -6,7 +6,7 @@ import { DialogForCreateForm } from "./FormDialog";
 import type { Event } from "~/server/db/schema";
 import EventView from "./EventView";
 import { selectedDateAtom } from "~/app/atoms";
-import { SetStateAction, useAtom } from "jotai";
+import { useAtom } from "jotai";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Button } from "./ui/button";
 import { cn } from "~/lib/utils";
