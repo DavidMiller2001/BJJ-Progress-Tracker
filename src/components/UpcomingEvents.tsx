@@ -7,7 +7,7 @@ import type { Event } from "~/server/db/schema";
 import EventView from "./EventView";
 
 const EventList = ({ events }: { events: Event[] }) => (
-  <ul className="space-y-4">
+  <ul className="space-y-4 overflow-y-scroll max-h-52">
     {events.map((event) => (
       <EventView key={event.id} event={event} />
     ))}
